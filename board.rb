@@ -1,23 +1,25 @@
 class Board
 	attr_accessor :board, :marker, :choice
     def	initialize()
-      # @board = ["","","","","","","","",""]
-      p "     Pick a number to multiply by itself to set a board size"
-      p "     3X3 is obviously the smallest playable board  ~OO~"
-      print "TTT::\\TICTAC>>"
-      @size = gets.chomp.to_i
+          p "     Pick a number to multiply by itself to set a board size"
+          p "     3X3 is the smallest playable board  ~^0v0^~  "
+          p "      "
+          p "      "
+          p "      "
+          print "H9000::\\TTT::\\TICTAC>>>"
+
+      user_input = gets.chomp.to_i
+      @size = user_input
       @board = Array.new((@size * @size), "")
-        @board.each_slice(@size) do |show|
-          p show 
-          # puts 
-        end
-      puts "  >>>#{@size}X#{@size}<<<  "
-      puts "   <<<BOARD>>>   #{@Board.length} <<<<<<<<<<<<<<<<<<<<<<LENGTH "
+       
+          puts "   <<<SIZE>>>#{@size}X#{@size}<<<<in boardclass<<<< SIZE "
+          puts "   <<<BOARD>>in boardclass>   #{@board.length} <<<<<<<<<<<<<<<<<<<<<<LENGTH "
+          # puts "   <<<SHOWBOARD>>in boardclass>   #{@showboard.length} <<<<<<<<<<<<<<<<<<<<<<LENGTH "
 
     end
 
     def place_marker(marker,choice)
-      # p "#{choice}is this getting there??????????????"
+      #  p "#{choice}is this getting there??????????????"
 	    @board[choice.to_i - 1] = marker
 		  @board
 	  end
@@ -42,14 +44,26 @@ class Board
       end
     end
 
-    def win_combos(board,size)
-      combos = [[fSlash],[bSlash],[across],[upNdown]]
+    # def win_combos(board,size)
+    #   combos = [[fSlash],[bSlash],[across],[upNdown]]
       
-        board.each do |diagWins|        ##~~Diag. Combos
-          fSlash = @size + (@size-1)    ##~~TopRight to bottomLeft
-          bSlash = @size + (@size+1)    ##~~
-        end  
-    end
+    #     board.each do |diagWins|        ##~~Diag. Combos
+    #       fSlash = @size + (@size-1)    ##~~TopRight to bottomLeft
+    #       bSlash = @size + (@size+1)    ##~~
+    #     end  
+    # end
+
+    def win_combos(board)
+      [[@board[0],@board[1],@board[2]],
+       [@board[3],@board[4],@board[5]],
+       [@board[6],@board[7],@board[8]],
+       [@board[0],@board[3],@board[6]],
+       [@board[1],@board[4],@board[7]],
+       [@board[2],@board[5],@board[8]],
+       [@board[0],@board[4],@board[8]],
+       [@board[2],@board[4],@board[6]]]
+     end
+
 
     def winr(board)
       win = []

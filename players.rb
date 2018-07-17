@@ -4,7 +4,7 @@ class Playerhuman
       @marker = marker
       @name = name
     end 
-    def move(board)
+    def move(board, size)
       p "                            "
       p "OK Human...Pick a spot...1-9"
       choice = gets.chomp.to_i
@@ -17,7 +17,7 @@ class Playerseq
       @marker = marker
       @name = name
     end
-    def move(board)	
+    def move(board, size)	
       ind = []
         board.each_with_index do |val,index|
           if val == "x" || val == "o"
@@ -38,7 +38,7 @@ class Playerrand
       @marker = marker
       @name = name
 	  end
-	  def move(board)	
+	  def move(board, size)	
 		  ind = []
 		    board.each_with_index do |val,index|
 		      if	val == "x" || val == "o"		  
@@ -52,10 +52,11 @@ class Playerrand
 end 
     ##-------##
 class Playerunbeets
-  attr_accessor :marker, :name 
+  attr_accessor :marker, :name
     def initialize(marker)
         @marker = marker
         @name = name
+        @size = board.board.size
     end  
     def win_move(board)
       board_state = [
@@ -111,24 +112,23 @@ class Playerunbeets
   # p "_________________________________________________________"
 
   def f_move(board, size)	
-                          ##~~Corner spots
+                        ##~~UpperRight
+                                    ##~~Corner spots
     c1 = board[0]                 ##~~Upper Left
-    c2 = @size                     ##~~UpperRight
-    c3 = board.length-(@size-1)    ##~~Bottom Left
+    c2 = @size
+    c3 = board.length-(@size)-1    ##~~Bottom Left
     c4 = board.length             ##~~Bottom Right
     corners = [[c1], [c2], [c3], [c4]]
     edge = []                      ##~~Edge spots
     choice = 0                    ##~~Def choice
       board.each do |leftEdge|    ##~~Get left edge posit.'s
-        board[0] + (@size+1)
+        board[0] + (@size)+1
       end
-
-
 
       if corners.any? {|a| board[a] == "x"}   ##~~checking for filled corner spots 
         choice = (board.length/2+1)               ##~~choosing centerSpot 
       elsif (board.length/2 == "x")
-        choice = (@size-(@size-1))
+        choice = (@size-(@size)-1)
       else edge.any? {|a| board[a] == "x"}   ##  checking for filled edge spots
         choice = 5
       end
@@ -243,3 +243,10 @@ end
   
 
  
+
+
+# board is //[:board, :winr, :marker, :full?, :choice, :val_spot, :place_marker, :marker=, :board=, :win_combos, :choice=, :remove_instance_variable, :instance_of?, :kind_of?, :is_a?, :tap, :public_send, :method, :public_method, :instance_variable_defined?, :define_singleton_method, :instance_variable_set, :singleton_method, :extend, :to_enum, :enum_for, :<=>, :===, :=~, :!~, :eql?, :respond_to?, :freeze, :inspect, :object_id, :send, :display, :to_s, :nil?, :hash, :class, :singleton_class, :clone, :dup, :itself, :taint, :tainted?, :untaint, :untrust, :untrusted?, :trust, :frozen?, :methods, :singleton_methods, :protected_methods, :private_methods, :public_methods, :instance_variable_get, :instance_variables, :!, :==, :!=, :__send__, :equal?, :instance_eval, :instance_exec, :__id__]
+
+
+
+# " ////[\"1\", \"2\", \"x\", \"4\", \"x\", \"6\", \"x\", \"8\", \"9\", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, \"o\", nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, \"o\"]<<<<<<<<<<<<<"
