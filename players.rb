@@ -6,7 +6,11 @@ class Playerhuman
     end 
     def move(board, size)
       p "                            "
-      p "OK Human...Pick a spot...1-9"
+      p "                            "
+      p "OK Human...Pick a spot...1-#{board.size}"
+      p "                            "
+      p "                            "
+      print "\\\H9000::\\\TTT::\\\TICTAC>>>"
       choice = gets.chomp.to_i
     end
   end   
@@ -56,7 +60,7 @@ class Playerunbeets
     def initialize(marker)
         @marker = marker
         @name = name
-        @size = board.board.size
+        # @size = board.board.size
     end  
     def win_move(board)
       board_state = [

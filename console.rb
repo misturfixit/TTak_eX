@@ -10,7 +10,6 @@ class Console
     @player2 = setup_players
     @current_player
     @inactive_player
-    @disp_board
     @multiplier =  Math.sqrt(board.board.size).to_i
    
   puts "Size in init.console. #{board.board.size}>>>>>>>SIZE"
@@ -77,54 +76,43 @@ class Console
     @current_player = player1
     @inactive_player = player2  
   end  
-
+  
   def print_board()
-    p "                                                             "
-    p "       VVVVVVVVVVVVVVVVVVVVvVVVVVVVVVVVVVVVVVVVVVV           "
-    p "       OK #{@current_player.marker} it's your turn  "
-    p "       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   "
-      
-    @disp_board = [*1..board.board.size]
-      # @disp_board.each_slice(@multiplier) do |row|
-      #   p row
-      # end  
-      p @disp_board
-
-    p "                                                             "
-      # @showboard.each do |disp|
-    # p "       #{@showboard[0]}  |!| #{@showboard[1]} |!| #{@showboard[2]}  "
-    # p "       ===|!|===|!|===   "
-    # p "       #{@showboard[3]}  |!| #{@showboard[4]} |!| #{@showboard[5]}  "
-    # p "       ===|!|===|!|===   "
-    # p "       #{@showboard[6]}  |!| #{@showboard[7]} |!| #{@showboard[8]}  "
-    # p "                                                             "
-    p "                                                             "
- 
-
-    # p "       #{@showboard[0]}  |!| #{@showboard[1]} |!| #{@showboard[2]}  "
-    # p "       ===|!|===|!|===   "
-    # p "       #{@showboard[3]}  |!| #{@showboard[4]} |!| #{@showboard[5]}  "
-    # p "       ===|!|===|!|===   "
-    # p "       #{@showboard[6]}  |!| #{@showboard[7]} |!| #{@showboard[8]}  "
-    # p "                                                             "
-    # p "                                                             "
+    p "                                                                   "
+    p "       VVVVVVVVVVVVVVVVVVVV~^0v0^~VVVVVVVVVVVVVVVVVVVVVV           "
+    p "                      OK #{@current_player.marker} it's your turn       "
+    p "             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            "
+    p "             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            "
+    board.board.each_slice(@multiplier) do |row|
+      p row
+    end  
+    
+    p "IN PRINTBOARD... #{@board.board}<<board #{@choice}<<choice #{@current_player.marker}<<marker<<<
+    <board,choice,playermarker>>"
+    
+    
+    # p @board
+    
   end
-
-  def showbup(disp_board, choice, marker)
+  
+  def showbup(board, choice, marker)
+    disp_board = [*1..board.board.size]
     choice = choice.to_i
-    @disp_board[choice - 1] = marker
-    @disp_board
+    p " <<<CHOICE IN SHOWBUP#{choice}<<<<<<<<<<"
+    disp_board[choice - 1] = marker
+    print_board()
   end
-
-  def get_move()
+  
+  def get_move() 
+    p "IN GETMOVE... #{@board}DISPBOARD  #{@current_player.marker}PLAYERMARKER<<board,choice,playermarker>>"
     @current_player.move(@board.board, @size)
   end
-
+  
   def checkval(choice)
-    if  @board.val_spot(@board.board,choice) == true
-      @board.place_marker(@current_player.marker,choice)
-      p "IN CHECKVAL... #{@disp_board} #{choice} #{@current_player.marker}"
-      showbup(@disp_board,choice,@current_player.marker)
+    if  @board.val_spot(@board.board, choice) == true
+      @board.place_marker(@current_player.marker, choice)
+      p "IN CHECKVAL... #{@board} #{choice} #{@current_player.marker}<<board,choice,playermarker>>"
+      showbup(@board, choice, @current_player.marker)
     else 
       p "Does Not Compute"
       get_move

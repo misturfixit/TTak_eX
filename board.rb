@@ -1,12 +1,15 @@
 class Board
 	attr_accessor :board, :marker, :choice
     def	initialize()
+          p "             "
           p "     Pick a number to multiply by itself to set a board size"
-          p "     3X3 is the smallest playable board  ~^0v0^~  "
-          p "      "
-          p "      "
-          p "      "
-          print "H9000::\\TTT::\\TICTAC>>>"
+          p "             "
+          p "           3X3 is the smallest playable board                "
+          p "             "
+          p "             "
+          p "                     ~^0v0^~               "
+          p "             "
+          print "\\\H9000::\\\TTT::\\\TICTAC>>>"
 
       user_input = gets.chomp.to_i
       @size = user_input
@@ -19,9 +22,10 @@ class Board
     end
 
     def place_marker(marker,choice)
-      #  p "#{choice}is this getting there??????????????"
+       p ">>>>>#{choice}is this getting there??????????????"
 	    @board[choice.to_i - 1] = marker
-		  @board
+      @board
+      p "this is #{@board}"
 	  end
 
     def val_spot(board,marker)
