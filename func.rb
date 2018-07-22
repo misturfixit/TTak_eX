@@ -30,20 +30,22 @@
     end
   end    
 
-  def win_combos(board)
-    [[board[0],board[1],board[2]],
-    [board[3],board[4],board[5]],
-    [board[6],board[7],board[8]],
-    [board[0],board[3],board[6]],
-    [board[1],board[4],board[7]],
-    [board[2],board[5],board[8]],
-    [board[0],board[4],board[8]],
-    [board[2],board[4],board[6]]]
-  end
+  # def win_combos(board)
+  #   [[board[0],board[1],board[2]],
+  #   [board[3],board[4],board[5]],
+  #   [board[6],board[7],board[8]],
+  #   [board[0],board[3],board[6]],
+  #   [board[1],board[4],board[7]],
+  #   [board[2],board[5],board[8]],
+  #   [board[0],board[4],board[8]],
+  #   [board[2],board[4],board[6]]]
+  # end
   
   def winner(board, player)
     win = []
-      win_combos(board).each do |comb|
+      win_combos(board).each.with_index do |comb, ndx|
+        if ndx == "opponentmarker" counter = counter + 1
+          if counter > winningcombinationlength return true 
         if comb[0] == "x" && comb[1] == "x" && comb[2] == "x"
             win << true
         elsif comb[0] == "o" && comb[1] == "o" && comb[2] == "o"
