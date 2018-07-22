@@ -87,19 +87,15 @@ class Console
     p "                                                                   "
   end
   
-  # def showbup(board, choice, marker)
-  #   disp_board = [*1..board.board.size]
-  #   choice = choice.to_i
-  #   # p " <<<CHOICE IN SHOWBUP#{choice}<<<<<<<<<<"
-  # end
-  
   def get_move() 
-    @current_player.move(@board.board, @size)
+    move = @current_player.move(@board.board, @size)
+    checkval(move)
   end
   
   def checkval(choice)
     if @board.val_spot(@board.board, choice) == true
-      @board.place_marker(@current_player.marker, choice)
+       @board.place_marker(@current_player.marker, choice)
+      player_sel
     else 
       p " Does Not Compute!! "
       get_move

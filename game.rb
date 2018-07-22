@@ -16,12 +16,11 @@ p ''
 p ''
     until $game == "done" do
       $game.print_board
-      move = $game.get_move
+      $game.get_move
       # print "<<<<<<THIS IS MOVE IN GAME #{move}"
-      $game.checkval(move)
+      # $game.checkval(move)
       $game.print_board
       p "FIRING MAH LAZERS!"
-      
         if $game.board.winr($game.board) == true
           p ''
           p "Player #{$game.current_player.marker} Wins This One"
@@ -33,8 +32,5 @@ p ''
           p "                         "
           p "                         "
           $game = "done"
-        else
-          $game.player_sel
         end  
-       
     end

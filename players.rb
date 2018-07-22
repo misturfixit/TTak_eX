@@ -87,74 +87,21 @@ class Playerunbeets
       counter = 0 
         comboarr.each do |boardspot|
           @testarr << gameboard[boardspot]
-            @limit.times.with_index do |nDeczhs|
-          # @size.times.with_index do |nDeczhs|
-                p  "<<<#{nDeczhs}>>>__nDeczhs over here Y'all"
-            @mark_arr << nDeczhs
-                p " __<<<#{@mark_arr}>>>>___MARKARRAY"                
-            end
-                p "COMBOS HERE >>> AT 'EM<<<<<#{@combos}>>>>>"
-                p "<<<<<<<#{comboarr}>>>>>>> is COMBOARR____"
-                p "<<<<__#{@testarr}__>>>> to TESTARRAY____"
+              if @testarr.select { |marker| marker.include?("x")}.size >= 1 && @testarr.select { |marker| marker.include?("o")}.size == 0 
+                # p "COMBOS HERE >>> AT 'EM<<<<<#{@combos}>>>>>"
+                # p "<<<<<<<#{comboarr}>>>>>>> is COMBOARR____"
+                # p "<<<<__#{@testarr}__>>>> to TESTARRAY____"
                 p "TESTARRAY___ LENGTH is {{{__#{@testarr.length}__}}} and LIMIT is [[[__#{@limit}__]]]"
-                p "GAMEBOARD___ is <<<__#{gameboard[boardspot]}__>>> and BOARDSPOT____ is (((__#{boardspot}__)))"
-                p "<<<<<#{gameboard}>>><<<GAMEBOARD>>>>>>>>"
-            if @testarr.select { |marker| marker.include?("x")}.size
-              choice = @testarr.sample
-            end  
+                # p "GAMEBOARD___ is <<<__#{gameboard[boardspot]}__>>> and BOARDSPOT____ is (((__#{boardspot}__)))"
+                # p "<<<<<#{gameboard}>>><<<GAMEBOARD>>>>>>>>"
 
-              # boardspot.each do |nDeczhs|
-              #   if testarr[count] == nDeczhs
-              #   end 
-              # end  
-          
+              return choice = @testarr.sample
+            end  
+          choice
           end
-          return choice
         end
       free(gameboard)
   end
-          # p "counter is #{counter}"
-          # comboarr.each do |boardspot|
-          #   puts "comboboardspot is #{boardspot}"
-          #   tempcombos = @combos[endex]
-          #   puts "@combos endex is #{@combos[endex]}"
-          #   tempcombos.each do |emptyindex|
-                # puts "emptyindex is #{emptyindex}"
-                # puts "looking in finalboard #{@finalboard}"
-                # puts "finalspot to check is #{@finalboard[endex][emptyindex]}"
-                # if gameboard[emptyindex] == " "
-                #   p "TEMPCOMBO IS #{tempcombos[endex][emptyindex]}"
-                #   @finalchoice = tempcombos[endex][emptyindex]
-                #   p "THIS IS YOUR FINAL CHOICE #{@finalchoice}"
-                # end
-
-          # end
-        # end
-              
-          # @finalboard.each.with_index do |finaliterationihope, endex|
-          #   xwin = finaliterationihope.select { |marker| marker.include?('x')}.size
-          #   owin = finaliterationihope.select { |marker| marker.include?('o')}.size
-          #   # puts "xwin size is #{xwin} owin size is #{owin} size is #{irrelevant} index this is #{endex}"
-          #     puts "LOOK AT ALL THESE COMBOS #{@combos} ENDEX IS #{endex}"
-          #     end
-          #     tempcombos = @combos[endex]
-          #     puts "@combos endex is #{@combos[endex]}"
-          #     tempcombos.each do |emptyindex|
-          #       # puts "emptyindex is #{emptyindex}"
-          #       # puts "looking in finalboard #{@finalboard}"
-          #       # puts "finalspot to check is #{@finalboard[endex][emptyindex]}"
-          #       p ""
-          #       if gameboard[emptyindex] == " "
-          #         p "TEMPCOMBO IS #{tempcombos[endex][emptyindex]}"
-          #         @finalchoice = tempcombos[endex][emptyindex]
-          #         p "THIS IS YOUR FINAL CHOICE #{@finalchoice}"
-          #       end
-          #     end
-
-
-          #   @finalchoice = @finalchoice + 1
-          # end
-    # end
 
 
 
