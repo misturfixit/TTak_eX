@@ -27,15 +27,14 @@ class Board
     
   def place_marker(marker,choice)
       # p "@boardchoice is #{choice}<<<<<<INPLACEMARKER"
-    @board[choice.to_i - 1] = marker
-      # p "@boardchoice222222 is #{@board[choice.to_i - 1]}<<<<<INPLACEMARKER2"
-    @board
+    @board[choice.to_i] = marker
+      @board
      # p "this is #{@board}"
   end
   
   def val_spot(board,marker)
     bob = marker.to_i
-    choice = bob -1
+    choice = bob
     if choice > @board.length  || choice < 0              ## hoped this'd work
       false
     elsif @board[choice] == "x" || @board[choice] == "o"
@@ -96,21 +95,21 @@ class Board
       finalboard = []
       win_combos(board)
         @combos.each do |testing|
-          fullrow = []
-          testing.each do |boardstate|
+        fullrow = []
+          testing.each do |boardstate|      ##-- Iterate through board positions
             # p "BOARDSTATE is <<<#{boardstate}>>>"
             # p "winning combos in boardstate <<<#{board.board[boardstate]}>>>"
             fullrow << board.board[boardstate]
           end
           finalboard << fullrow
-          finalboard.each do |finaliterationihope|
-            xwin = finaliterationihope.select { |marker| marker.include?('x')}.size     ##-- This is awesome too,.. .thanks Grant
-            owin = finaliterationihope.select { |marker| marker.include?('o')}.size
-              if xwin == @size || owin == @size
-                return true 
+            finalboard.each do |finaliterationihope|
+              xwin = finaliterationihope.select { |marker| marker.include?('x')}.size       ##-- This is awesome too,..nice short iteration checking all positions
+              owin = finaliterationihope.select { |marker| marker.include?('o')}.size       ##-- containing matching markers and the size of the array against the
+              if xwin == @size || owin == @size                                             ##-- length of the actual board row ...thankyuu Grant and Googl
+                  return true 
               end
-          end
+            end
         end
       end
-    end
+end
 

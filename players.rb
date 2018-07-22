@@ -1,7 +1,8 @@
 require_relative "board.rb"
+require_relative "console.rb"
 
-def initialize()
-end
+# def initialize()
+# end
 
 class Playerhuman
   attr_accessor :marker, :name
@@ -64,11 +65,12 @@ end
     
 
 class Playerunbeets
-  attr_accessor :marker, :name
+  attr_accessor :marker, :name, :board, :size
     def initialize(marker)
       @marker = marker
       @name = name
       @board
+      @size
     end  
       
   def f_move(board, size)	
@@ -78,38 +80,37 @@ class Playerunbeets
 
   def move(gameboard, irrelevant)
     @combos = $game.board.win_combos(gameboard)
-              p "COMBOS LOOK AT 'EM<<<<<#{@combos}>>>>>"
     @combos.each do |comboarr|
-      @testarray = []
-      limit = comboarr.length
-              p "<<<<<<<#{comboarr}>>>>>>> is COMBOARR____"
+      @testarr = []
+      @mark_arr = []
+      @limit = comboarr.length
       counter = 0 
-      comboarr.each do |boardspot|
-        @testarray << gameboard[boardspot]
-              puts "<<<<__#{@testarray}__>>>> to TESTARRAY____"
-              p "testarray LENGTH is {{{__#{@testarray.length}__}}} and limit length is [[[__#{limit}__]]]"
-              p "GAMEBOARD___ is <<<__#{gameboard[boardspot]}__>>> and BOARDSPOT____ is (((__#{boardspot}__)))"
-              p "<<<<<#{gameboard}>>><<<GAMEBOARD>>>>>>>>"
+        comboarr.each do |boardspot|
+          @testarr << gameboard[boardspot]
+            @limit.times.with_index do |nDeczhs|
+          # @size.times.with_index do |nDeczhs|
+                p  "<<<#{nDeczhs}>>>__nDeczhs over here Y'all"
+            @mark_arr << nDeczhs
+                p " __<<<#{@mark_arr}>>>>___MARKARRAY"                
+            end
+                p "COMBOS HERE >>> AT 'EM<<<<<#{@combos}>>>>>"
+                p "<<<<<<<#{comboarr}>>>>>>> is COMBOARR____"
+                p "<<<<__#{@testarr}__>>>> to TESTARRAY____"
+                p "TESTARRAY___ LENGTH is {{{__#{@testarr.length}__}}} and LIMIT is [[[__#{@limit}__]]]"
+                p "GAMEBOARD___ is <<<__#{gameboard[boardspot]}__>>> and BOARDSPOT____ is (((__#{boardspot}__)))"
+                p "<<<<<#{gameboard}>>><<<GAMEBOARD>>>>>>>>"
+            if @testarr.select { |marker| marker.include?("x")}.size
+              choice = @testarr.sample
+            end  
 
-          gameboard.limit.times.with_index do
-            
-          end    
-
-
-            # boardspot.each do |nDeczhs|
-            #   if testarray[count] == nDeczhs
-
-            #   end 
-            # end  
-        
-          # if @testarray.select { |marker| marker.include?('x') || marker.include?('o') }.size
-            # choice = limit % 2
-            choice = boardspot +3
-          # else
-          # end
+              # boardspot.each do |nDeczhs|
+              #   if testarr[count] == nDeczhs
+              #   end 
+              # end  
+          
+          end
+          return choice
         end
-        return choice
-      end
       free(gameboard)
   end
           # p "counter is #{counter}"
@@ -161,9 +162,9 @@ class Playerunbeets
     def free(board)
       choice = 999999913
       opnspot = []
-      p "FREEMOVE IS FIRING<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+      p "FREEMOVE IS FIRING<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!!<<<<<<<<<<<"
         board.each_with_index do |val, i|
-          if val == ' '
+          if val == " "
             opnspot << i
           end
         end
