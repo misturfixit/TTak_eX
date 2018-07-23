@@ -85,7 +85,13 @@ class Playerunbeets
                   # p "<<<<<<<#{comboarr}>>>>>>> is COMBOARRAY____"
         comboarr.each do |boardspot|
           @testarr << gameboard[boardspot]                            ##~~vvvvvv__Some fancy footwork here__vvvvvv
-            if @testarr.size == comboarr.size && @testarr.select {|marker| marker.include?("x")}.size >= comboarr.size - 2 && @testarr.select {|marker| marker.include?("o")}.size == 0
+            if @testarr.size == comboarr.size && @testarr.select {|marker| marker.include?("o")}.size >= comboarr.size - 1 && @testarr.select {|marker| marker.include?("x")}.size == 0
+              comboarr.each do |finalspot|
+                if gameboard[finalspot] == " "
+                  return finalspot
+                end
+              end
+            elsif @testarr.size == comboarr.size && @testarr.select {|marker| marker.include?("x")}.size >= comboarr.size - 2 && @testarr.select {|marker| marker.include?("o")}.size == 0
               comboarr.each do |finalspot|
                 if gameboard[finalspot] == " "
                   @prioritychoice << finalspot
@@ -100,13 +106,23 @@ class Playerunbeets
             end
         end
     end
-      if @prioritychoice == []
+          p "<<<PRIORITYCHOICE<<is<<<<#{@prioritychoice}>>>>>"
+          p " CORNERS>>ARE<<<<#{corners}>>>>>HEREcornercorner"
+    corners.each do |corner|
+      if @prioritychoice.include?(corner)
+        p "priority corner is #{corner}"
+        return corner
+      elsif @normalchoice.include?(corner)
+        p "normal corner is #{corner}"
+        return corner
+      elsif @prioritychoice == []
         return @normalchoice.sample
       elsif @prioritychoice != []
         return @prioritychoice[0]
       else
         free(gameboard)
-    end
+      end
+    end  
   end
   #               # p "COMBOS HERE >>> AT 'EM<<<<<#{@combos}>>>>>"
   #               # p "<<<<<<<#{comboarr}>>>>>>> is COMBOARR____"
