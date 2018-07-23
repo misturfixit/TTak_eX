@@ -61,7 +61,8 @@ class Playerunbeets
       @name = name
       @board
       @size
-    end  
+    end
+
   def f_move(board, size)	
     choice = board.length % 2                   ##~~ Picking the midlle pos. first (on odd sized boards)
   end
@@ -72,34 +73,32 @@ class Playerunbeets
     c3 = gameboard.length - size    ##~~Bottom Left
     c4 = gameboard.length             ##~~Bottom Right
     corners = [c1, c2, c3, c4]        ##~~All corners
-              p ">>><<<<<{{CORNERS HERE_<<<<#{corners}>>>>__>CZHECH 'EM OUT}}"
-    @prioritychoice = []
-    @normalchoice = []
+    @prioritychoice = []              ##~~Choice if 
+    @normalchoice = []                ##~~
     @combos = $game.board.win_combos(gameboard)       ##~~ Iterating through winning combos array
-              # p "COMBOS HERE >>> L00K AT 'EM<<<<<#{@combos}>>>>>"
-              # p "<<<<<#{gameboard}>>><<<GAMEBOARD>>>>>>>>"
-    @combos.each do |comboarr|                      ##~~ Now through each individual array
+                  # p ">>><<<<<{{CORNERS HERE_<<<<#{corners}>>>>__>CZHECH 'EM OUT}}"
+                  # p "COMBOS HERE >>> L00K AT 'EM<<<<<#{@combos}>>>>>"
+                  # p "<<<<<#{gameboard}>>><<<GAMEBOARD>>>>>>>>"
+    @combos.each do |comboarr|                      ##~~ Now... through each individual array
       @testarr = []
       @limit = comboarr.length
-      counter = 0
-      comboarr.each do |boardspot|
-              # p "<<<<<<<#{comboarr}>>>>>>> is COMBOARR____"
-        @testarr << gameboard[boardspot]
-        if @testarr.size == comboarr.size && @testarr.select {|marker| marker.include?("x")}.size >= comboarr.size - 2 && @testarr.select {|marker| marker.include?("o")}.size == 0
-              # p "<<<<<<<#{comboarr}>>>>>>> is COMBOARR____"
-          comboarr.each do |finalspot|
-            if gameboard[finalspot] == " "
-              @prioritychoice << finalspot
+                  # p "<<<<<<<#{comboarr}>>>>>>> is COMBOARRAY____"
+        comboarr.each do |boardspot|
+          @testarr << gameboard[boardspot]                            ##~~vvvvvv__Some fancy footwork here__vvvvvv
+            if @testarr.size == comboarr.size && @testarr.select {|marker| marker.include?("x")}.size >= comboarr.size - 2 && @testarr.select {|marker| marker.include?("o")}.size == 0
+              comboarr.each do |finalspot|
+                if gameboard[finalspot] == " "
+                  @prioritychoice << finalspot
+                end
+              end
+            elsif @testarr.size == comboarr.size && @testarr.select {|marker| marker.include?("x")}.size >= 1 && @testarr.select {|marker| marker.include?("o")}.size == 0
+              comboarr.each do |finalspot|
+                if gameboard[finalspot] == " "
+                  @normalchoice << finalspot
+                end
+              end
             end
-          end
-        elsif @testarr.size == comboarr.size && @testarr.select {|marker| marker.include?("x")}.size >= 1 && @testarr.select {|marker| marker.include?("o")}.size == 0
-          comboarr.each do |finalspot|
-            if gameboard[finalspot] == " "
-              @normalchoice << finalspot
-            end
-          end
         end
-      end
     end
       if @prioritychoice == []
         return @normalchoice.sample
@@ -107,7 +106,7 @@ class Playerunbeets
         return @prioritychoice[0]
       else
         free(gameboard)
-      end
+    end
   end
   #               # p "COMBOS HERE >>> AT 'EM<<<<<#{@combos}>>>>>"
   #               # p "<<<<<<<#{comboarr}>>>>>>> is COMBOARR____"
