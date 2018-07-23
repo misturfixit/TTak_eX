@@ -4,44 +4,45 @@ class Board
   def	initialize()
     finalboard = []
     @combos = []
-          p "             "
-          p "     Pick a number to multiply by itself to set a board size"
-          p "             "
-          p "             "
-          p "           3X3 is the smallest playable board"
-          p "             "
-          p "                     ~^0v0^~              "
-          p "             "
-          print "\\\H9000::\\\TTT::\\\TICTAC>>>: "
+      p "                                                             "
+      p "     Pick a number to multiply by itself to set a board size "
+      p "                                                             "
+      p "                                                             "
+      p "           3X3 is the smallest playable board                "
+      p "                                                             "
+      p "                     ~^0v0^~                                 "
+      p "                                                             "
+      print "\\\H9000::\\\TTT::\\\TICTAC>>>:"
     user_input = gets.chomp.to_i
       if user_input < 3
-        puts "  Seriously now??... You read this ^^above^^ right??  "
+        puts "  Seriously now??... You read this ^^above^^ right?? 
+                Pick a valid multiplier please... "
         sleep(1.5)
         initialize()
       else  
         @size = user_input
         @board = Array.new((@size * @size), " ")
       end  
-        puts "      <<<SIZE>>>>>>#{@size}X#{@size}<<<<<<  "  
+        puts "      <<<<<<SIZE>>>>>><<<#{@size}>>><X><<<#{@size}>>>>>>"  
   end
     
   def place_marker(marker,choice)
       # p "@boardchoice is #{choice}<<<<<<INPLACEMARKER"
     @board[choice.to_i] = marker
-      @board
+    @board
      # p "this is #{@board}"
   end
   
   def val_spot(board,marker)
     bob = marker.to_i
     choice = bob
-    if choice > @board.length  || choice < 0              ## hoped this'd work
+    if choice > @board.length  || choice < 0              ##
       false
     elsif @board[choice] == "x" || @board[choice] == "o"
       false
     else
       true
-      end
+    end
   end
 
   def full?()
@@ -52,7 +53,7 @@ class Board
     end
   end
 
-  def win_combos(board)                   ## Kinda proud of this one :)
+  def win_combos(board)                   ## Building//defining winning combos with a loop and some sequentially nested loops...Kinda proud of this one :)
     @combos = []
     lr_diag = []
     rl_diag = []
