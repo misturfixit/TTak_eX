@@ -10,11 +10,16 @@ class Playerhuman                                 ##~~ Need to change to a singl
   def move(board, size)
     p "                                           "
     p "                                           "
-    p " OK Human...Pick a spot...1 - #{board.size}"
+    p " OK Human...Pick a spot between 0... #{board.size - 1}"
     p "                                           "
     p "                                           "
     print "\\\H9000::\\\TTT::\\\TICTAC>>>"
     choice = gets.chomp.to_i
+      # if choice > board.size
+      #   p "Uhh-Uhh"
+      # else
+      #   choice = gets.chomp.to_i
+      # end  
   end
 end   
 
@@ -76,13 +81,9 @@ class Playerunbeets
     @prioritychoice = []              ##~~Choice if 
     @normalchoice = []                ##~~
     @combos = $game.board.win_combos(gameboard)       ##~~ Iterating through winning combos array
-                  # p ">>><<<<<{{CORNERS HERE_<<<<#{corners}>>>>__>CZHECH 'EM OUT}}"
-                  # p "COMBOS HERE >>> L00K AT 'EM<<<<<#{@combos}>>>>>"
-                  # p "<<<<<#{gameboard}>>><<<GAMEBOARD>>>>>>>>"
     @combos.each do |comboarr|                      ##~~ Now... through each individual array
       @testarr = []
       @limit = comboarr.length
-                  # p "<<<<<<<#{comboarr}>>>>>>> is COMBOARRAY____"
         comboarr.each do |boardspot|
           @testarr << gameboard[boardspot]                            ##~~vvvvvv__Some fancy footwork here__vvvvvv
             if @testarr.size == comboarr.size && @testarr.select {|marker| marker.include?("o")}.size >= comboarr.size - 1 && @testarr.select {|marker| marker.include?("x")}.size == 0
@@ -106,14 +107,14 @@ class Playerunbeets
             end
         end
     end
-          p "<<<PRIORITYCHOICE<<is<<<<#{@prioritychoice}>>>>>"
-          p " CORNERS>>ARE<<<<#{corners}>>>>>HEREcornercorner"
+          # p "<<<PRIORITYCHOICE<<is<<<<#{@prioritychoice}>>>>>"
+          # p " CORNERS>>ARE<<<<#{corners}>>>>>HEREcornercorner"
     corners.each do |corner|
       if @prioritychoice.include?(corner)
-        p "priority corner is #{corner}"
+        # p "priority corner is #{corner}"
         return corner
       elsif @normalchoice.include?(corner)
-        p "normal corner is #{corner}"
+        # p "normal corner is #{corner}"
         return corner
       elsif @prioritychoice == []
         return @normalchoice.sample
